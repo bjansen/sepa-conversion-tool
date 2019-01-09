@@ -6,7 +6,8 @@
 
 	<groupId>com.github.bjansen</groupId>
 	<artifactId>sepa-conversion-tool-parent</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.1.0</version>
+	<packaging>pom</packaging>
 
 	<modules>
 		<module>sepa-conversion-tool-generator</module>
