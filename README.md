@@ -1,4 +1,4 @@
-# sepa-conversion-tool
+# sepa-conversion-tool ![](https://img.shields.io/maven-central/v/com.github.bjansen/sepa-conversion-tool.svg?style=flat)
 A Java library that implements the [SEPA conversion table](https://www.europeanpaymentscouncil.eu/document-library/guidance-documents/sepa-requirements-extended-character-set-unicode-subset-best)
 provided by the [EPC](https://www.europeanpaymentscouncil.eu/)
 
@@ -29,7 +29,7 @@ The library can be imported to Maven projects like this:
 <dependency>
 	<groupId>com.github.bjansen</groupId>
 	<artifactId>sepa-conversion-tool</artifactId>
-	<version>0.1.0</version>
+	<version>0.1.1</version>
 </dependency>
 ```
 
