@@ -47,9 +47,10 @@ public abstract class SepaCharacterConverter {
 	 * Converts the given {@code source} string using the character replacement table.
 	 *
 	 * @param source the string to convert. Can be {@code null}.
+	 * @param oneChar restrict conversion to one char of the replacement
 	 * @return the converted string, or {@code null} if the {@code source} was {@code null}.
 	 */
-	public String convertToSepaCharacters(String source) {
+	private String convert(String source, boolean oneChar) {
 		if (source == null) {
 			return null;
 		}
@@ -60,9 +61,34 @@ public abstract class SepaCharacterConverter {
 		for (int i = 0; i < source.length(); i++) {
 			char sourceChar = source.charAt(i);
 			String replacement = sourceChar < replacements.length ? replacements[sourceChar] : "";
+			if (oneChar && replacement != null && replacement.length() > 1) {
+				replacement = replacement.substring(0, 1);
+			}
 			builder.append(replacement == null ? sourceChar : replacement);
 		}
 
 		return builder.toString();
+	}
+
+	/**
+	 * Converts the given {@code source} string using the SEPA character replacement table.
+	 *
+	 * @param source the string to convert. Can be {@code null}.
+	 * @return the converted string, or {@code null} if the {@code source} was {@code null}.
+	 */
+	public String convertToSepaCharacters(String source) {
+		return convert(source, false);
+	}
+
+	/**
+	 * Converts the given {@code source} string using the SEPA character replacement table
+	 * taking only one char of the replacement result.
+	 * .
+	 *
+	 * @param source the string to convert. Can be {@code null}.
+	 * @return the converted string, or {@code null} if the {@code source} was {@code null}.
+	 */
+	public String convertToOneSepaCharacter(String source) {
+		return convert(source, true);
 	}
 }
