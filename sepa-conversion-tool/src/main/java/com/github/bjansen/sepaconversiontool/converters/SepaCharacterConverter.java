@@ -35,13 +35,13 @@ public abstract class SepaCharacterConverter {
 	public static SepaCharacterConverter fromCustomReplacements(String[] replacementTable) {
 		return new SepaCharacterConverter() {
 			@Override
-			protected String[] getReplacements() {
+			public String[] getReplacements() {
 				return replacementTable;
 			}
 		};
 	}
 
-	protected abstract String[] getReplacements();
+	public abstract String[] getReplacements();
 
 	/**
 	 * Converts the given {@code source} string using the character replacement table.
