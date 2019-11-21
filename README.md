@@ -29,7 +29,7 @@ The library can be imported to Maven projects like this:
 <dependency>
 	<groupId>com.github.bjansen</groupId>
 	<artifactId>sepa-conversion-tool</artifactId>
-	<version>0.1.2</version>
+	<version>0.2.0</version>
 </dependency>
 ```
 
