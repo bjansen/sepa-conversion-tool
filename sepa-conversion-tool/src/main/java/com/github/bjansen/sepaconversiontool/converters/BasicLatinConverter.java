@@ -1,7 +1,14 @@
 package com.github.bjansen.sepaconversiontool.converters;
 
+import java.util.Arrays;
+import java.util.List;
+
 class BasicLatinConverter extends SepaCharacterConverter {
   private static final String[] REPLACEMENTS = new String[8365];
+
+  private static final List<Range> SUPPRESSIONS = Arrays.asList(
+    new Range(0x0460, 0x20AB)
+  );
 
   static {
     REPLACEMENTS[0x0021] = ".";
@@ -1023,5 +1030,10 @@ class BasicLatinConverter extends SepaCharacterConverter {
   @Override
   public String[] getReplacements() {
     return REPLACEMENTS;
+  }
+
+  @Override
+  public List<Range> getSuppressedRanges() {
+    return SUPPRESSIONS;
   }
 }

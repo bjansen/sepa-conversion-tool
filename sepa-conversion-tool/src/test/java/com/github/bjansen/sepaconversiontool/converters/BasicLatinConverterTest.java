@@ -13,6 +13,9 @@ class BasicLatinConverterTest {
 		assertEquals("hello", converter.convertToSepaCharacters("hello"));
 		assertEquals("Hello", converter.convertToSepaCharacters("Ħĕŀŀœ"));
 		assertEquals("suka blaty", converter.convertToSepaCharacters("сука блять"));
-		assertEquals("outside of range", converter.convertToSepaCharacters("outsi�de o�f r≧an∰g℗e"));
+		assertEquals("outsi.de o.f r.an.g.e", converter.convertToSepaCharacters("outsi�de o�f r≧an∰g℗e"));
+		assertEquals("hello.z.z.world", converter.convertToSepaCharacters("helloय़zॠzॡworld"));
+		assertEquals(".", converter.convertToSepaCharacters("\u3000"));
+		assertEquals(".........E.", converter.convertToSepaCharacters("љњћќѝўџ\u0500\u20ab€\u20ad"));
 	}
 }

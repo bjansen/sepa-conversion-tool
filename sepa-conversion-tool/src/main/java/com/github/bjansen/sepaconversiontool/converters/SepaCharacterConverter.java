@@ -1,5 +1,8 @@
 package com.github.bjansen.sepaconversiontool.converters;
 
+import java.util.Collections;
+import java.util.List;
+
 /**
  * Converts a string to a limited subset of characters in compliance with recommendations
  * made by the European Payments Council.
@@ -41,6 +44,14 @@ public abstract class SepaCharacterConverter {
 		};
 	}
 
+	/**
+	 * A list of ranges of characters that should always be replaced with {@code .}. This can be used to
+	 * make the replacement array much shorter.
+	 */
+	public List<Range> getSuppressedRanges() {
+		return Collections.emptyList();
+	}
+
 	public abstract String[] getReplacements();
 
 	/**
@@ -55,14 +66,30 @@ public abstract class SepaCharacterConverter {
 		}
 
 		StringBuilder builder = new StringBuilder();
-		String[] replacements = getReplacements();
 
 		for (int i = 0; i < source.length(); i++) {
 			char sourceChar = source.charAt(i);
-			String replacement = sourceChar < replacements.length ? replacements[sourceChar] : "";
-			builder.append(replacement == null ? sourceChar : replacement);
+			builder.append(getReplacement(sourceChar));
 		}
 
 		return builder.toString();
+	}
+
+	private String getReplacement(char sourceChar) {
+		String[] replacements = getReplacements();
+
+		if (sourceChar >= replacements.length) {
+			return ".";
+		}
+
+		for (Range range : getSuppressedRanges()) {
+			if (range.contains(sourceChar)) {
+				return ".";
+			}
+		}
+
+		String replacement = replacements[sourceChar];
+
+		return replacement == null ? String.valueOf(sourceChar) : replacement;
 	}
 }
